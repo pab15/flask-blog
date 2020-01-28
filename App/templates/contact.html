@@ -1,0 +1,24 @@
+{% extends "template.html" %}
+{% block title %}Contact{% endblock %}
+{% block body %}
+    <center>
+        <h1>
+            Contact
+        </h1>
+        <form>
+        <p>
+        <input type="text" name="first-name" placeholder="First Name:">
+        </p>
+        <p>
+        <input type="text" name="first-name" placeholder="Last Name:">
+        </p>
+        <p>
+        <input type="text" name="email" placeholder="Email:">
+        </p>
+        <p>
+        <textarea rows="10" columns="50" placeholder="Message:"></textarea>
+        </p>
+        <button type="submit">Submit</button>
+        </form>
+    </center>
+{% endblock %}
