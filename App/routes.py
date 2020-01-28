@@ -1,14 +1,25 @@
 from App import app
 from flask import redirect, url_for, render_template, request
+from flask_mail import Mail, Message
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/about')
+@app.route('/about/')
 def about():
     return render_template('about.html')
 
-@app.route('/contact')
+@app.route('/contact/', methods=['GET', 'POST'])
 def contact():
-    return render_template('contact.html')
+    if request.method == 'POST':
+        first_name = request.form['firstname']
+        last_name = request.form['lastname']
+        email = request.form['email']
+        message = request.form['message']
+        if (first_name == "") or (last_name == "") or (email == "") or (message == ""):
+             return render_template('contact.html')
+        else:
+            return render_template('successfulsub.html', fn=first_name, msg=message)
+    else:
+        return render_template('contact.html')

@@ -1,0 +1,17 @@
+{% extends "template.html" %}
+{% block title %}Contact{% endblock %}
+{% block body %}
+    <center>
+        <br>
+        <h4>
+            Thanks {{ fn }}, your submission was successful!
+        </h4>
+        <hr>
+        <p>
+            Review your message below:
+        </p>
+        <p id="usr_msg">
+            "{{ msg }}"
+        </p>
+    </center>
+{% endblock %}
