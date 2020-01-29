@@ -1,10 +1,22 @@
 from App import app
-from flask import redirect, url_for, render_template, request
+from flask import redirect, url_for, render_template, request, session
 from flask_mail import Mail, Message
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/all')
+def all():
+    return render_template('all.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/signup')
+def signup():
+    return render_template('sign-up.html')
 
 @app.route('/about/')
 def about():
