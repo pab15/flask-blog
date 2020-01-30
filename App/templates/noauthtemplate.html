@@ -10,13 +10,10 @@
 <body>
     <ul id="navbar">
         <li id="navbar-item">
-            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('login') }}">Login</a>
         </li>
         <li id="navbar-item">
-            <a href="{{ url_for('about') }}">About</a>
-        </li>
-        <li id="navbar-item">
-            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('signup') }}">Sign Up</a>
         </li>
     </ul>
     {% block body %}{% endblock %}

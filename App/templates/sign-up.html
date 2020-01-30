@@ -1,4 +1,4 @@
-{% extends "template.html" %}
+{% extends "noauthtemplate.html" %}
 {% block title %}Sign Up{% endblock %}
 {% block body %}
     <center>
@@ -6,5 +6,22 @@
             Sign Up
         </h1>
         <hr>
+        <form action="#" method="POST">
+            <p>
+                <input type="text" name="user_name" value="" placeholder="Username:">
+            </p>
+            <p>
+                <input type="text" name="e_mail" value="" placeholder="Email:">
+            </p>
+            <p>
+                <input type="text" name="pass_word" value="" placeholder="Password:">
+            </p>
+            <p>
+                <input type="text" name="pass_word_validate" value="" placeholder=" Confirm Password:">
+            </p>
+            <p>
+                <input type="submit" value="Submit">
+            </p>
+        </form>
     </center>
 {% endblock %}
