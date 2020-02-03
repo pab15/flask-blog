@@ -8,17 +8,20 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    <ul id="navbar">
-        <li id="navbar-item">
-            <a href="{{ url_for('index') }}">Home</a>
-        </li>
-        <li id="navbar-item">
-            <a href="{{ url_for('about') }}">About</a>
-        </li>
-        <li id="navbar-item">
-            <a href="{{ url_for('contact') }}">Contact</a>
-        </li>
-    </ul>
+    <div id="menu">
+        <ul>
+            <li>
+                <a id="navitem" href="{{ url_for('index') }}">Home</a>
+            </li>
+            <li>
+                <a id="navitem" href="{{ url_for('about') }}">About</a>
+            </li>
+            <li>
+                <a id="navitem" href="{{ url_for('contact') }}">Contact</a>
+            </li>
+        </ul>
+    </div>
+    
     {% block body %}{% endblock %}
 </body>
 </html>

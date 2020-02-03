@@ -1,5 +1,16 @@
 {% extends "template.html" %}
 {% block title %}All Files{% endblock %}
 {% block body %}
-    
+    <center>
+        <h1>
+            All Pages:
+        </h1>
+    </center>
+    <ul>
+        {% for file in allfiles["pages"] %}
+        <li>
+            <a href="{{ url_for({{file}}) }}">{{file}}</a>
+        </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
