@@ -5,12 +5,14 @@
         <h1>
             All Pages:
         </h1>
+        <ul>
+            {% for file in allfiles["pages"] %}
+                {% if file != 'template' and file != 'noauthtemplate' and file != 'successfulsub' %}
+                    <li>
+                        <a href="{{ url_for(file) }}">{{file}}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
     </center>
-    <ul>
-        {% for file in allfiles["pages"] %}
-        <li>
-            <a href="{{ url_for({{file}}) }}">{{file}}</a>
-        </li>
-        {% endfor %}
-    </ul>
 {% endblock %}

@@ -1,31 +1,11 @@
 import os
 import sqlite3
 from App import app
-from flask import redirect, url_for, render_template, request, session
-
-# Database Initializer:
-db_connection = sqlite3.connect('database/flaskblog.db')
-
-curs = db_connection.cursor()
-
-# Use the cursor.execute() to use sql commands:
-# curs.execute("""CREATE TABLE users (
-#                 id integer,
-#                 username text,
-#                 email text,
-#                 password text
-#             )""")
-
-db_connection.commit()
-
-def addUser(username, email, password):
-    curs.execute("""INSERT INTO users (username, email, password)
-                    VALUES ({username}, {email}, {password})
-                """)
-    db_connection.commit()
+from flask import redirect, url_for, render_template, request, session, flash
 
 # Home Page if logged in, otherwise user if directed to login page:
 @app.route('/')
+@app.route('/index')
 def index():
     if "username" in session:
         return render_template('index.html')
@@ -38,7 +18,7 @@ def index():
 def all():
     view_data = {}
     files = os.listdir(r"C:\Users\peter\Desktop\Courses\CS-232\Projects\flask-blog\App\templates")
-    view_data["pages"] = files
+    view_data["pages"] = [file.split('.')[0] for file in files]
     if "username" in session:
         return render_template('all.html', allfiles=view_data)
     else:
@@ -58,7 +38,7 @@ def login():
         else:
             session["username"] = username
             session["password"] = password
-            return redirect(url_for('index'))
+            return render_template('index.html')
     else:
         if "username" in session:
             return render_template('index.html')
@@ -77,12 +57,14 @@ def signup():
         pass_word = request.form['pass_word']
         password_confirm = request.form['pass_word_validate']
         if (user_name == "") or (e_mail == "") or (pass_word == "") or (password_confirm == "") or (pass_word != password_confirm):
-             return render_template('sign-up.html')
+            return render_template('signup.html')
         else:
-            addUser(user_name, e_mail, pass_word)
             return render_template('login.html')
     else:
-        return render_template('sign-up.html')
+        if "username" in session:
+            return render_template('index.html')
+        else:
+            return render_template('signup.html')
 
 # About page that checks if the user is logged in and has a session, and if they
 #   do, returns a customized page for the user
@@ -119,9 +101,9 @@ def contact():
     else:
         return render_template('login.html')
 
-# @app.route("/<view_name>")
-# #input parameter name must match route parameter
-# def render_page(view_name):
-#     html = 'view_name' + '.html'
-#     view_data = {} #create empty dictionary
-#     return render_template(html, view_data=session)
+# @app.route("/edit")
+@app.route("/<view_name>")
+#input parameter name must match route parameter
+def render_page(view_name):
+    view_data = {}
+    return render_template(view_name + '.html', data=view_data)
