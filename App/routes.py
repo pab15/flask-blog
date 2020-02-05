@@ -1,9 +1,8 @@
 import os
 import sqlite3
 from App import app
-from flask import redirect, url_for, render_template, request, session, flash
+from flask import redirect, url_for, render_template, request, session
 
-# Home Page if logged in, otherwise user if directed to login page:
 @app.route('/')
 @app.route('/index')
 def index():
@@ -12,12 +11,16 @@ def index():
     else:
         return render_template('login.html')
     
+@app.route("/favicon.ico")
+def favicon():
+    return ""
+    
 # Shows a list of all pages in the website if admin is logged in,
 #   otherwise the user is redirected to the login page:
 @app.route('/all')
 def all():
     view_data = {}
-    files = os.listdir(r"C:\Users\peter\Desktop\Courses\CS-232\Projects\flask-blog\App\templates")
+    files = os.listdir(r"C:\Users\peter\Desktop\Courses\2020-Spring\CS-232\Projects\flask-blog\App\templates")
     view_data["pages"] = [file.split('.')[0] for file in files]
     if "username" in session:
         return render_template('all.html', allfiles=view_data)
@@ -101,9 +104,31 @@ def contact():
     else:
         return render_template('login.html')
 
-# @app.route("/edit")
+@app.route("/edit/<view_name>", methods=['GET', 'POST'])
+def edit_page(view_name):
+    if "username" in session:
+        if request.method == 'POST':
+            view_data = {}
+            new_content = request.form['content']
+            file_name = "C:\\Users\\peter\\Desktop\\Courses\\2020-Spring\\CS-232\\Projects\\flask-blog\\App\\templates\\" + view_name + '.html'
+            view_data["page_name"] = view_name
+            new_file = open(file_name, 'w')
+            new_file.write(new_content)
+            new_file.close()
+            view_data["content"] = new_content
+            return render_template('edit.html', data=view_data)
+        else:
+            view_data = {}
+            file_name = "C:\\Users\\peter\\Desktop\\Courses\\2020-Spring\\CS-232\\Projects\\flask-blog\\App\\templates\\" + view_name + '.html'
+            view_data["page_name"] = view_name
+            file = open(file_name, 'r')
+            view_data["content"] = file.read()
+            file.close()
+            return render_template('edit.html', data=view_data)
+    else:
+        return render_template('login.html')
+
 @app.route("/<view_name>")
-#input parameter name must match route parameter
 def render_page(view_name):
     view_data = {}
     return render_template(view_name + '.html', data=view_data)

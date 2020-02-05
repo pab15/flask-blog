@@ -1,0 +1,21 @@
+{% extends "template.html" %}
+{% block title %}Edit{% endblock %}
+{% block body %}
+<center>
+    <h1>Edit {{data['page_name']}} </h1>
+    <hr><br>
+    <form method="POST" action="/edit/{{data['page_name']}}">
+        <input type="text" value="{{data['page_name']}}" name="page_name" />
+        <br><br>
+        <textarea id="edit_html" name="content" rows="25">
+            {{data["content"]}}
+        </textarea>
+        <br><br>
+        {% if data["page_name"] == "" %}
+            <input type="submit" value="Create">
+        {% else %}
+            <input type="submit" value="Edit">
+        {% endif %}
+    </form>
+</center>
+{% endblock %}

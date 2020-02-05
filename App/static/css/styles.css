@@ -59,10 +59,19 @@ input[type="submit"] {
     width: 20%;
 }
 
-textarea {
+#contact_msg {
     border-radius: 10px;
     border-color: rgb(0, 0, 0);
     text-align: center;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    width: 60%;
+}
+
+#edit_html {
+    border-radius: 10px;
+    border-color: rgb(0, 0, 0);
+    text-align: left;
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
     width: 60%;
