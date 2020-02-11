@@ -7,7 +7,7 @@
         </h1>
         <ul>
             {% for file in allfiles["pages"] %}
-                {% if file != 'template' and file != 'noauthtemplate' and file != 'successfulsub' %}
+                {% if file != 'template' and file != 'noauthtemplate' and file != 'successfulsub' and file != 'edit' %}
                     <li>
                         <a href="{{ url_for(file) }}">{{file}}</a>
                     </li>
